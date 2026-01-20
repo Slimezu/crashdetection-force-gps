@@ -31,7 +31,7 @@ unsigned long lastLocationUpdate = 0;
 const unsigned long LOCATION_INTERVAL = 300000;  // 5 minutes
 
 // ---------- SETTINGS ----------
-const float CRASH_G_THRESHOLD = 1.5; // Adjust after testing (~5cm drop)
+const float CRASH_G_THRESHOLD = 1.5; // Adjust after testing
 const unsigned long HOLD_TIME = 20; // ms
 unsigned long impactStart = 0;
 
@@ -58,12 +58,12 @@ void getWifiLocation() {
   DynamicJsonDocument doc(1024);
   JsonArray wifiArray = doc.createNestedArray("wifiAccessPoints");
   
-  for (int i = 0; i < n && i < 10; i++) {  // Use up to 10 strongest
+  for (int i = 0; i < n && i < 10; i++) {  // Up to 10 strongest
     JsonObject ap = wifiArray.createNestedObject();
     ap["macAddress"] = WiFi.BSSIDstr(i);
     ap["signalStrength"] = WiFi.RSSI(i);
   }
-  doc["considerIp"] = false;  // Ignore public IP for better accuracy
+  doc["considerIp"] = false;
 
   String payload;
   serializeJson(doc, payload);
@@ -91,7 +91,7 @@ void getWifiLocation() {
   }
   
   http.end();
-  WiFi.scanDelete();  // Free memory
+  WiFi.scanDelete();
 }
 
 // ---------- WEBSITE ----------
@@ -131,7 +131,7 @@ body { font-family: Arial; background: #020617; color: white; text-align: center
   } else {
     page += "<h2 class='safe'>STATUS: SAFE</h2>";
     page += "<div class='value'>Time: " + getTimeNow() + "</div>";
-    page += "<div class='value'>Impact: " + String(g, 2) + " g</div>";  // Live g-force
+    page += "<div class='value'>Impact: " + String(g, 2) + " g</div>";
   }
 
   // Always show current location
@@ -188,7 +188,7 @@ void setup() {
 }
 
 // ---------- LOOP ----------
-float g = 0.0;  // Live g-force for display
+float g = 0.0;  // Live g-force
 void loop() {
   server.handleClient();
 
