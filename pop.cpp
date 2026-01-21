@@ -10,8 +10,8 @@
 const char* GOOGLE_API_KEY = "AIzaSyCPlNhJxaSMXAEpiVjDYo2LE1Tb9mzRb3o";  // ← Paste your key here
 
 // ---------- WIFI ----------
-const char* ssid = "Atal Labs";
-const char* password = "Atal@dps";
+const char* ssid = "Atal Lab";
+const char* password = "Atal@123";
 
 // ---------- OBJECTS ----------
 WebServer server(80);
