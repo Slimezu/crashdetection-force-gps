@@ -10,8 +10,8 @@
 const char* GOOGLE_API_KEY = "AIzaSyCPlNhJxaSMXAEpiVjDYo2LE1Tb9mzRb3o";  // ← Paste your key here
 
 // ---------- WIFI ----------
-const char* ssid = "RacerAbrar";
-const char* password = "zafar123";
+const char* ssid = "Atal Labs";
+const char* password = "Atal@dps";
 
 // ---------- OBJECTS ----------
 WebServer server(80);
@@ -21,6 +21,9 @@ MPU6050 mpu;
 bool crashDetected = false;
 String crashTime = "__";
 float crashG = 0.0;
+
+// ---------- LIVE G-FORCE (GLOBAL) ----------
+float g = 0.0;  // Current real-time g-force (global for web display)
 
 // ---------- LOCATION DATA ----------
 double currentLat = 0.0;
@@ -131,7 +134,7 @@ body { font-family: Arial; background: #020617; color: white; text-align: center
   } else {
     page += "<h2 class='safe'>STATUS: SAFE</h2>";
     page += "<div class='value'>Time: " + getTimeNow() + "</div>";
-    page += "<div class='value'>Impact: " + String(g, 2) + " g</div>";
+    page += "<div class='value'>Impact: " + String(g, 2) + " g</div>";  // Now uses global g
   }
 
   // Always show current location
@@ -188,7 +191,6 @@ void setup() {
 }
 
 // ---------- LOOP ----------
-float g = 0.0;  // Live g-force
 void loop() {
   server.handleClient();
 
@@ -197,7 +199,7 @@ void loop() {
   float axg = ax / 16384.0;
   float ayg = ay / 16384.0;
   float azg = az / 16384.0;
-  g = sqrt(axg * axg + ayg * ayg + azg * azg);
+  g = sqrt(axg * axg + ayg * ayg + azg * azg);  // Update global g
 
   if (g > CRASH_G_THRESHOLD) {
     if (impactStart == 0) {
