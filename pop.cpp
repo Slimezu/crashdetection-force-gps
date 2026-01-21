@@ -7,7 +7,7 @@
 #include <ArduinoJson.h>
 
 // ---------- GOOGLE GEOLOCATION ----------
-const char* GOOGLE_API_KEY = "AIzaSyCPlNhJxaSMXAEpiVjDYo2LE1Tb9mzRb3o";  // ← Paste your key here
+const char* GOOGLE_API_KEY = "AIzaSyCTuoroZzCmVr8AomeuFSZ5otQ7GRsL8gk";  // ← Paste your key here
 
 // ---------- WIFI ----------
 const char* ssid = "Atal Lab";
